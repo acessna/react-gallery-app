@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import apiKey from '../config';
+import { Route, BrowserRouter } from 'react-router-dom';
+import Nav from './Nav';
 
 export default class App extends Component {
 
@@ -11,14 +13,12 @@ export default class App extends Component {
     };
   }
 
-  componentDidMount() {
-    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&text=dogs&safe_search=1&content_type=1&media=photos&per_page=15&format=json&nojsoncallback=1`)
+  getImages = (query) => {
+    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
     .then(response => {
-      console.log(response);
       this.setState({
         pics: response.data.photos.photo
       });
-      console.log(this.state.pics);
     })
     .catch(error => {
       console.log('Error fetching and parsing data', error);
@@ -29,8 +29,11 @@ export default class App extends Component {
 
   render(){
   return (
-    <div className="App">
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Nav />
+      </div>
+    </BrowserRouter>
   );
   }
 }
