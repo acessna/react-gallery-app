@@ -3,6 +3,11 @@ import axios from 'axios';
 import apiKey from '../config';
 import { Route, BrowserRouter } from 'react-router-dom';
 import Nav from './Nav';
+import Cars from './Cars';
+import Birds from './Birds';
+import Houses from './Houses';
+
+
 
 export default class App extends Component {
 
@@ -30,8 +35,11 @@ export default class App extends Component {
   render(){
   return (
     <BrowserRouter>
-      <div className="App">
+      <div className="container">
         <Nav />
+        <Route path='/cars' render = {() => <Cars />}/>
+        <Route path='/birds' render = {() => <Birds />}/>
+        <Route path='/houses' render = {() => <Houses />}/>
       </div>
     </BrowserRouter>
   );
