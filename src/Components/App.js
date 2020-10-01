@@ -11,25 +11,33 @@ import Houses from './Houses';
 
 export default class App extends Component {
 
-  constructor(){
+  constructor() {
     super();
     this.state = {
-      pics: []
-    };
+      cars: [],
+      birds: [],
+      houses: []
+    }
   }
 
   getImages = (query) => {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
     .then(response => {
-      this.setState({
-        pics: response.data.photos.photo
-      });
+        let imgs = response.data.photos.photo;
+        return imgs;
     })
-    .catch(error => {
-      console.log('Error fetching and parsing data', error);
-    });
+    // .catch(error => {
+    //   console.log('Error fetching and parsing data', error);
+    // });
   }
 
+  componentDidMount(){
+    this.setState({
+      cars: this.getImages("cars"),
+      birds: this.getImages("birds"), 
+      houses: this.getImages("houses")
+    });
+  }
 
 
   render(){
@@ -37,7 +45,7 @@ export default class App extends Component {
     <BrowserRouter>
       <div className="container">
         <Nav />
-        <Route path='/cars' render = {() => <Cars />}/>
+        <Route path='/cars' render = {() => <Cars carImgs={this.getImages("cars")}/>}/>
         <Route path='/birds' render = {() => <Birds />}/>
         <Route path='/houses' render = {() => <Houses />}/>
       </div>
