@@ -1,10 +1,11 @@
 import React from 'react';
 
 const Cars = (props) => {
-    console.log(props);
     return (
+    <div>
         <h1>Cars</h1>
+        </div>
     )
-}
+};
 
 export default Cars;
