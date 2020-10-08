@@ -11,7 +11,7 @@ import apiKey from '../config';
 export default class App extends Component {
 
     state = {
-      imgs: [],
+      searchedImgs: [],
       Cars: [],
       Houses: [],
       Birds: []
@@ -23,7 +23,7 @@ export default class App extends Component {
   getImages = (query) => {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&text=${query}&per_page=24&format=json&nojsoncallback=1`)
     .then(response => {
-        this.setState({imgs: response.data.photos.photo});
+        this.setState({searchedImgs: response.data.photos.photo});
     })
      .catch(error => {
        console.log('Error fetching and parsing data', error);
@@ -51,9 +51,9 @@ export default class App extends Component {
       <div className="container">
         <SearchForm onSearch={this.getImages}/>
         <Nav />
-        <Route path="/search/:query" render ={() => <PhotoContainer data={this.state.imgs}/>}/>
-        <Route path="/Cars" render = {() => <PhotoContainer data={this.state.Cars}/>}/>
-        <Route path="/Houses" render = {() => <PhotoContainer data={this.state.Houses}/>}/>
+        <Route path="/search/:query" render ={() => <PhotoContainer data={this.state.searchedImgs}/>}/>
+        <Route path="/:Cars" render = {() => <PhotoContainer data={this.state.Cars}/>}/>
+        <Route path="/:Houses" render = {() => <PhotoContainer data={this.state.Houses}/>}/>
         <Route path="/Birds" render = {() => <PhotoContainer data={this.state.Birds}/>}/>
       </div>
 
