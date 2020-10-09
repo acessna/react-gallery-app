@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, BrowserRouter } from 'react-router-dom';
+import { Route, BrowserRouter, Redirect } from 'react-router-dom';
 import Nav from './Nav';
 import PhotoContainer from './PhotoContainer';
 import SearchForm from './SearchForm';
@@ -51,9 +51,11 @@ export default class App extends Component {
       <div className="container">
         <SearchForm onSearch={this.getImages}/>
         <Nav />
+        <Route exact path="/" />
+        <Redirect to="/Cars" />
         <Route path="/search/:query" render ={() => <PhotoContainer data={this.state.searchedImgs}/>}/>
-        <Route path="/:Cars" render = {() => <PhotoContainer data={this.state.Cars}/>}/>
-        <Route path="/:Houses" render = {() => <PhotoContainer data={this.state.Houses}/>}/>
+        <Route path="/Cars" render = {() => <PhotoContainer data={this.state.Cars}/>}/>
+        <Route path="/Houses" render = {() => <PhotoContainer data={this.state.Houses}/>}/>
         <Route path="/Birds" render = {() => <PhotoContainer data={this.state.Birds}/>}/>
       </div>
 
