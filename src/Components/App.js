@@ -51,8 +51,9 @@ export default class App extends Component {
       <div className="container">
         <SearchForm onSearch={this.getImages}/>
         <Nav />
-        <Route exact path="/" />
+        <Route exact path="/">
         <Redirect to="/Cars" />
+        </Route>
         <Route path="/search/:query" render ={() => <PhotoContainer data={this.state.searchedImgs}/>}/>
         <Route path="/Cars" render = {() => <PhotoContainer data={this.state.Cars}/>}/>
         <Route path="/Houses" render = {() => <PhotoContainer data={this.state.Houses}/>}/>
