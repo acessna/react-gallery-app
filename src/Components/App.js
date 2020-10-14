@@ -1,65 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route, BrowserRouter, Redirect, Switch } from 'react-router-dom';
 import Nav from './Nav';
 import PhotoContainer from './PhotoContainer';
 import SearchForm from './SearchForm';
-import axios from 'axios';
-import apiKey from '../config';
 import NotFound from './NotFound';
 
 
 
-export default class App extends Component {
+const App = () => {
 
-    state = {
-      searchedImgs: [],
-      Cars: [],
-      Houses: [],
-      Birds: []
-    }
-
-
-
-
-  getImages = (query) => {
-    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&text=${query}&per_page=24&format=json&nojsoncallback=1`)
-    .then(response => {
-        this.setState({searchedImgs: response.data.photos.photo});
-    })
-     .catch(error => {
-       console.log('Error fetching and parsing data', error);
-     });
-  }
-
-  getCategory = (query) => {
-    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&text=${query}&per_page=24&format=json&nojsoncallback=1`)
-    .then(response => {
-      this.setState({[query]: response.data.photos.photo});
-    })
-     .catch(error => {
-       console.log('Error fetching and parsing data', error);
-     });
-  }
-      componentDidMount(){
-        this.getCategory("Cars");
-        this.getCategory("Houses");
-        this.getCategory("Birds");
-    }
-
-  render(){
   return (
     <BrowserRouter>
       <div className="container">
-        <SearchForm onSearch={this.getImages}/>
+        <SearchForm />
         <Nav />
         <Switch>
           <Route exact path="/">
           <Redirect to="/Cars" />
           </Route>
-          <Route path="/search/:query" render ={() => <PhotoContainer data={this.state.searchedImgs}/>}/>
-          <Route path="/Cars" render = {() => <PhotoContainer data={this.state.Cars}/>}/>
-          <Route path="/Houses" render = {() => <PhotoContainer data={this.state.Houses}/>}/>
-          <Route path="/Birds" render = {() => <PhotoContainer data={this.state.Birds}/>}/>
+          <Route exact path="/search/:query" component={PhotoContainer}/>
+          <Route  exact path="/:query" component={PhotoContainer}/>
           <Route>
             <NotFound />
           </Route>
@@ -67,6 +27,7 @@ export default class App extends Component {
       </div>
     </BrowserRouter>
   );
-  }
 }
+
+export default App;
 
