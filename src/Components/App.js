@@ -16,10 +16,10 @@ const App = () => {
         <Nav />
         <Switch>
           <Route exact path="/">
-          <Redirect to="/Cars" />
+          <Redirect to="/home/Cars" />
           </Route>
           <Route exact path="/search/:query" component={PhotoContainer}/>
-          <Route  exact path="/:query" component={PhotoContainer}/>
+          <Route  exact path="/home/:query" component={PhotoContainer}/>
           <Route>
             <NotFound />
           </Route>
