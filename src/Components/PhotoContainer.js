@@ -7,7 +7,7 @@ export default class PhotoContainer extends Component {
     constructor(props){
         super(props);
         this.state={
-            imgs: ""
+            photoComps: ""
         }
     }
 
@@ -22,7 +22,7 @@ export default class PhotoContainer extends Component {
             }
 
             this.setState({
-                imgs:imgs
+                photoComps:imgs
             });
         }
 
@@ -30,13 +30,13 @@ export default class PhotoContainer extends Component {
 
 
 
-            console.log(this.state.imgs);
+            console.log(this.state.photoComps);
 
           return(
             <div className="photo-container">
                 <h2>{this.props.match.params.query}</h2>
                 <ul>
-                    {this.state.imgs}
+                    {this.state.photoComps}
                 </ul>
             </div>
           );
