@@ -1,47 +1,28 @@
-import React, { Component } from 'react'; 
+import React from 'react'; 
 import Photo from './Photo';
 import NotFound from './NotFound';
 
-export default class PhotoContainer extends Component {
+const PhotoContainer = (props) => {
 
-    constructor(props){
-        super(props);
-        this.state={
-            photoComps: ""
-        }
+    let results = props.data;
+    let imgs;
+    if(results){
+            imgs = results.map(img => <Photo url={`https://live.staticflickr.com/${img.server}/${img.id}_${img.secret}.jpg`} key={img.id}/>)
+    } else {
+            imgs= <NotFound />
     }
-
-        componentDidMount(){
-            this.props.getImages(this.props.match.params.query);
-            let results = this.props.data;
-            let imgs;
-            if(results.length > 0){
-                    imgs = results.map(img => <Photo url={`https://live.staticflickr.com/${img.server}/${img.id}_${img.secret}.jpg`} key={img.id}/>)
-            } else {
-                    imgs= <NotFound />
-            }
-
-            this.setState({
-                photoComps:imgs
-            });
-        }
-
-        render(){
-
-
-
-            console.log(this.state.photoComps);
-
-          return(
-            <div className="photo-container">
-                <h2>{this.props.match.params.query}</h2>
-                <ul>
-                    {this.state.photoComps}
-                </ul>
-            </div>
-          );
-    }
+    return(
+    <div className="photo-container">
+        <h2>{props.match.params.query}</h2>
+        <ul>
+            {imgs}
+        </ul>
+    </div>
+    );
+    
 }
+
+export default PhotoContainer;
 
 
 

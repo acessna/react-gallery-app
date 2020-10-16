@@ -3,10 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './Components/App';
 import * as serviceWorker from './serviceWorker';
+import {BrowserRouter, Route} from 'react-router-dom';
 
 
 ReactDOM.render(
-  <App />, 
+  <BrowserRouter>
+    <Route exact path="/search/:query" render= { routeProps => <App {...routeProps} />}/>
+    <Route  exact path="/home/:query" render= {routeProps => <App {...routeProps} />}/>
+  </BrowserRouter>, 
   document.getElementById('root')
 );
 

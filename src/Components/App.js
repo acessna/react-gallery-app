@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, BrowserRouter, Redirect, Switch } from 'react-router-dom';
+import { Route, BrowserRouter, Redirect, Switch, withRouter } from 'react-router-dom';
 import Nav from './Nav';
 import PhotoContainer from './PhotoContainer';
 import SearchForm from './SearchForm';
@@ -8,7 +8,7 @@ import axios from 'axios';
 import apiKey from '../config';
 
 
-export default class App extends Component {
+class App extends Component {
 
   state ={
     imgs: []
@@ -24,7 +24,13 @@ export default class App extends Component {
      });
   }
 
+  componentDidMount(){
+    this.getImages(this.props.match.params.query);
+    console.log(this.props);
+  }
+
   render(){
+    
   return (
     <BrowserRouter>
       <div className="container">
@@ -34,8 +40,8 @@ export default class App extends Component {
           <Route exact path="/">
           <Redirect to="/home/Cars" />
           </Route>
-          <Route exact path="/search/:query" render= { routeProps => <PhotoContainer {...routeProps} data={this.state.imgs} getImages={this.getImages}/>}/>
-          <Route  exact path="/home/:query" render= {routeProps => <PhotoContainer {...routeProps} data={this.state.imgs} getImages={this.getImages}/>}/>
+          <Route exact path="/search/:query" render= { routeProps => <PhotoContainer {...routeProps} data={this.state.imgs} />}/>
+          <Route  exact path="/home/:query" render= {routeProps => <PhotoContainer {...routeProps} data={this.state.imgs} />}/>
           <Route>
             <NotFound />
           </Route>
@@ -45,4 +51,6 @@ export default class App extends Component {
   );
   }
 }
+
+export default withRouter(App);
 
