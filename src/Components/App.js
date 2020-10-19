@@ -26,28 +26,27 @@ class App extends Component {
 
   componentDidMount(){
     this.getImages(this.props.match.params.query);
-    console.log(this.props);
   }
 
   render(){
-  return (
-    <BrowserRouter>
-      <div className="container">
-        <SearchForm />
-        <Nav />
-        <Switch>
-          <Route exact path="/">
-          <Redirect to="/home/Cars" />
-          </Route>
-          <Route exact path="/search/:query" render= { routeProps => <PhotoContainer {...routeProps} data={this.state.imgs} />}/>
-          <Route  exact path="/home/:query" render= {routeProps => <PhotoContainer {...routeProps} data={this.state.imgs} />}/>
-          <Route>
-            <NotFound />
-          </Route>
-        </Switch>
-      </div>
-    </BrowserRouter>
-  );
+    return (
+      <BrowserRouter>
+        <div className="container">
+          <SearchForm />
+          <Nav />
+          <Switch>
+            <Route exact path="/">
+            <Redirect to="/home/Cars" />
+            </Route>
+            <Route exact path="/search/:query" render= { routeProps => <PhotoContainer {...routeProps} data={this.state.imgs} />}/>
+            <Route  exact path="/home/:query" render= {routeProps => <PhotoContainer {...routeProps} data={this.state.imgs} />}/>
+            <Route>
+              <NotFound />
+            </Route>
+          </Switch>
+        </div>
+      </BrowserRouter>
+    );
   }
 }
 
