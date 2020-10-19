@@ -9,10 +9,10 @@ import {BrowserRouter, Route, Redirect} from 'react-router-dom';
 ReactDOM.render(
   <BrowserRouter>
     <Route exact path="/">
-      <Redirect to="/home/Cars" />
+      <Redirect to="/Home/Cars" />
     </Route>
-    <Route exact path="/search/:query" render= { routeProps => <App {...routeProps} />}/>
-    <Route  exact path="/home/:query" render= {routeProps => <App {...routeProps} />}/>
+    <Route exact path="/Search/:query" render= { routeProps => <App {...routeProps} />}/>
+    <Route  exact path="/Home/:query" render= {routeProps => <App {...routeProps} />}/>
   </BrowserRouter>, 
   document.getElementById('root')
 );

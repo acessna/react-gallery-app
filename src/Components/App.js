@@ -26,6 +26,7 @@ class App extends Component {
 
   componentDidMount(){
     this.getImages(this.props.match.params.query);
+    console.log(this.props);
   }
 
   render(){
@@ -35,10 +36,10 @@ class App extends Component {
           <Nav />
           <Switch>
             <Route exact path="/">
-            <Redirect to="/home/Cars" />
+            <Redirect to="/Home/Cars" />
             </Route>
-            <Route exact path="/search/:query" render= { routeProps => <PhotoContainer {...routeProps} data={this.state.imgs} />}/>
-            <Route  exact path="/home/:query" render= {routeProps => <PhotoContainer {...routeProps} data={this.state.imgs} />}/>
+            <Route exact path="/Search/:query" render= { routeProps => <PhotoContainer {...routeProps} data={this.state.imgs} />}/>
+            <Route  exact path="/Home/:query" render= {routeProps => <PhotoContainer {...routeProps} data={this.state.imgs} />}/>
             <Route>
               <NotFound />
             </Route>
