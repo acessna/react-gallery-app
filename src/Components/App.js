@@ -30,7 +30,6 @@ class App extends Component {
 
   render(){
     return (
-      <BrowserRouter>
         <div className="container">
           <SearchForm />
           <Nav />
@@ -45,7 +44,6 @@ class App extends Component {
             </Route>
           </Switch>
         </div>
-      </BrowserRouter>
     );
   }
 }
