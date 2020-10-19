@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, BrowserRouter, Redirect, Switch, withRouter } from 'react-router-dom';
+import { Route, Redirect, Switch, withRouter } from 'react-router-dom';
 import Nav from './Nav';
 import PhotoContainer from './PhotoContainer';
 import SearchForm from './SearchForm';
