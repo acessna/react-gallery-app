@@ -18,7 +18,7 @@ export default class PhotoContainer extends Component {
     render(){
         return(
         <div className="photo-container">
-            <h2>{this.props.match.params.query}</h2>
+            <h2>{this.props.query}</h2>
             <ul>
                 {this.getPhotos()}
             </ul>

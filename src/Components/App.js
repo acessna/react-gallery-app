@@ -11,7 +11,7 @@ import apiKey from '../config';
 class App extends Component {
 
   state ={
-    imgs: []
+    imgs: [],
   }
 
   getImages = (query) => {
@@ -26,7 +26,12 @@ class App extends Component {
 
   componentDidMount(){
     this.getImages(this.props.match.params.query);
-    console.log(this.props);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.query !== this.props.match.params.query) {
+      this.getImages(this.props.match.params.query);
+    }
   }
 
   render(){
@@ -38,8 +43,8 @@ class App extends Component {
             <Route exact path="/">
             <Redirect to="/Home/Cars" />
             </Route>
-            <Route exact path="/Search/:query" render= { routeProps => <PhotoContainer {...routeProps} data={this.state.imgs} />}/>
-            <Route  exact path="/Home/:query" render= {routeProps => <PhotoContainer {...routeProps} data={this.state.imgs} />}/>
+            <Route exact path="/Search/:query"  render= { () => <PhotoContainer  query={this.props.match.params.query} data={this.state.imgs} />}/>
+            <Route  exact path="/Home/:query" render= { () => <PhotoContainer query={this.props.match.params.query} data={this.state.imgs} />}/>
             <Route>
               <NotFound />
             </Route>
